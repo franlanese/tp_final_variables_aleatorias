@@ -10,6 +10,7 @@ price = df[(df['price'] > 0) & (df['price'] <= 60)]['price']
 n = len(price)
 ybar = price.mean()
 lam = 1 / ybar
+suma_desvios_cuad = ((price - ybar) ** 2).sum()  # suma de (y_i - ybar)^2
 s = price.std(ddof=1)  # desviacion estandar muestral
 
 
@@ -24,6 +25,12 @@ area = FY(1e6)
 # 4. Probabilidades concretas
 p_menor_ybar = FY(ybar)
 p_mayor_ybar_mas_s = 1 - FY(ybar + s)
+
+# --- Desviacion estandar muestral ---
+display(Math(
+    rf's = \sqrt{{\dfrac{{1}}{{n-1}}\sum_{{i=1}}^{{n}}(y_i-\bar y)^2}} '
+    rf'= \sqrt{{\dfrac{{{suma_desvios_cuad:.2f}}}{{{n - 1}}}}} = {s:.4f}'
+))
 
 # --- Resumen de parametros ---
 display(Markdown(
